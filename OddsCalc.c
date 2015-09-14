@@ -2,6 +2,7 @@
 
 int main()
 {
+    //Declare some variables because this is just C
     int target = -1;
     char input_str[255];
     int advantage = -1;
@@ -10,11 +11,13 @@ int main()
     int successes = 0;
     int failures = 0;
     double odds;
+
+    //Print a nice little header
     printf("**********************\n");
     printf("Odds calculator\n");
     printf("Author: Ian Carlson\n");
 
-    //Get input
+    //Get the target DC, AC, or whatever
     printf("Enter target number: ");
     if(1 != scanf("%d",&target))
     {
@@ -22,6 +25,7 @@ int main()
         return 0;
     }
 
+    //Check if we have advantage
     printf("Advantage? (y/n): ");
     if(1 != scanf("%s",input_str))
     {
@@ -33,6 +37,7 @@ int main()
     else
         advantage = 0;
 
+    //Check if we have disadvantage
     printf("Disadvantage? (y/n): ");
     if(1 != scanf("%s",input_str))
     {
@@ -44,6 +49,7 @@ int main()
     else
         disadvantage = 0;
 
+    //Get the modifier to add to the roll
     printf("Enter Modifier (Ability Mod + Proficiency): ");
     if(1 != scanf("%d",&modifier))
     {
@@ -53,6 +59,8 @@ int main()
 
 
     //Now, count all possible rolls
+    
+    //Disadvantage
     if(disadvantage && !advantage)
     {
         int i,j;
@@ -63,6 +71,7 @@ int main()
                 else
                     failures++;
     }
+    //Advantage
     else if(advantage && !disadvantage)
     {
         int i,j;
@@ -73,6 +82,7 @@ int main()
                 else
                     failures++;
     }
+    //Normal
     else
     {
         int i;
@@ -82,8 +92,10 @@ int main()
             else
                 failures++;
     }
-
+    
+    //Calculate odds of success
     odds = (double)successes / (successes + failures);
+    //Print them
     printf("Success chance: %g\n",odds);
     return 0;
 
